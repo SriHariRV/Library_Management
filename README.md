@@ -1,4 +1,5 @@
 **Library Management System**
+
 The Library Management System is a web-based application designed to streamline the management of library resources, facilitate patron checkouts, and generate receipts. 
 Leveraging HTML, CSS, and JavaScript for the frontend, along with Python Flask for server-side functionality, this system offers a user-friendly interface for librarians and patrons alike.
 
