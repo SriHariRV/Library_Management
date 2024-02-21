@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management Portal</title>
+  <link rel="stylesheet" type="text/css" href="../static/styles.css">
+</head>
+<body>
+<h1>LIBRARY MANAGEMENT</h1>
+
+<label for="searchInput">Search:</label>
+<input type="text" id="searchInput" oninput="searchBooks(this.value)">
+
+
+<label for="genreFilter">Filter by Genre:</label>
+<select id="genreFilter" onchange="filterBooks(this.value)">
+  <option value="">All Genres</option>
+  <option value="Adventure">Adventure</option>
+  <option value="Fantasy">Fantasy</option>
+  <option value="Mystery">Mystery</option>
+  <option value="Romance">Romance</option>
+  <option value="Thriller">Thriller</option>
+  <option value="Science Fiction">Science Fiction</option>
+  <option value="Historical Fiction">Historical Fiction</option>
+</select>
+
+<table id="bookTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Published Date</th>
+      <th>Genre</th>
+    </tr>
+  </thead>
+  <tbody id="bookTableBody">
+   
+  </tbody>
+</table>
+
+<div id="paginationButtons">
+  
+</div>
+
+
+
+<h2>BOOKS ADDED</h2>
+<table id="newlyAddedBookTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Published Date</th>
+    </tr>
+  </thead>
+  <tbody id="newlyAddedBookTableBody">
+    
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3"><button id="checkoutBtn" onclick="checkout()">Checkout</button></td>
+    </tr>
+  </tfoot>
+</table>
+
+<div id="checkoutForm" style="display: none;">
+  <h2>Checkout Form</h2>
+  <label for="userName">Name:</label>
+  <input type="text" id="userName"><br>
+  <label for="phoneNumber">Phone Number:</label>
+  <input type="text" id="phoneNumber"><br>
+  <label for="checkoutDate">Date:</label>
+  <input type="text" id="checkoutDate" placeholder="dd/mm/yyyy"><br>
+  <button onclick="generateReceipt()">Generate Receipt</button>
+</div>
+
+<div id="receipt" style="display: none;">
+  <h2>Receipt</h2>
+  <div id="receiptContent"></div>
+</div>
+
+<script src="../static/scripts.js"></script>
+<script>
+  function generateReceipt() {
+    const userName = document.getElementById('userName').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const checkoutDate = document.getElementById('checkoutDate').value;
+
+    
+    if (userName.trim() === '' || phoneNumber.trim() === '' || checkoutDate.trim() === '') {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    
+    const newlyAddedBooks = Array.from(newlyAddedBookTableBody.children).map(row => {
+      return {
+        name: row.cells[0].textContent,
+        author: row.cells[1].textContent,
+        publishedDate: row.cells[2].textContent
+      };
+    });
+  }
+  function generateReceipt() {
+    const userName = document.getElementById('userName').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const checkoutDate = document.getElementById('checkoutDate').value;
+
+    
+    if (userName.trim() === '' || phoneNumber.trim() === '' || checkoutDate.trim() === '') {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+   
+    const newlyAddedBooks = Array.from(newlyAddedBookTableBody.children).map(row => {
+        return {
+            name: row.cells[0].textContent,
+            author: row.cells[1].textContent,
+            publishedDate: row.cells[2].textContent
+        };
+    });
+
+    
+    const data = {
+        userName: userName,
+        phoneNumber: phoneNumber,
+        checkoutDate: checkoutDate,
+        newlyAddedBooks: newlyAddedBooks
+    };
+
+fetch('/generate_receipt', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+        
+        if (data.message) {
+            const receiptContent = document.getElementById('receiptContent');
+            receiptContent.innerHTML = `
+                <p><strong>User Name:</strong> ${userName}</p>
+                <p><strong>Phone Number:</strong> ${phoneNumber}</p>
+                <p><strong>Checkout Date:</strong> ${checkoutDate}</p>
+                <p><strong>Newly Added Books:</strong></p>
+                <ul>
+                    ${newlyAddedBooks.map(book => `<li>${book.name} by ${book.author} (${book.publishedDate})</li>`).join('')}
+                </ul>
+            `;
+            document.getElementById('receipt').style.display = 'block'; 
+                 } else {
+            alert('Error generating receipt. Please try again later.');
+        }
+    })
+    .catch(error => {
+        console.error('Error generating receipt:', error);
+        alert('Error generating receipt. Please try again later.');
+    });
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f7f4; /* Light blue */
+  color: #333; /* Dark gray */
+  margin: 20px; /* Leave space on all sides */
+}
+
+/* Container styles */
+.container {
+  max-width: 400px; /* Reduced max-width */
+  margin: 0 auto; /* Center the container */
+  padding: 20px;
+  background-color: #fff; /* White */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  border-radius: 10px;
+  border: 2px solid #ccc; /* Gray border */
+}
+
+/* Heading styles */
+h1, h2 {
+  color: #004d40; /* Dark green */
+  text-align: center; /* Center alignment */
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 8px; /* Reduced padding */
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Light gray */
+}
+
+th {
+  background-color: #009688; /* Dark cyan */
+  color: #fff;
+}
+
+/* Button styles */
+button {
+  background-color: #004d40; /* Dark green */
+  border: none;
+  color: #fff;
+  padding: 8px 12px; /* Reduced padding */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px; /* Reduced font size */
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+  outline: none; /* Remove outline */
+}
+
+button:hover {
+  background-color: #00796b; /* Darker green */
+}
+
+/* Form styles */
+form {
+  margin-bottom: 20px;
+}
+
+input[type="text"], select {
+  width: calc(100% - 20px); /* Reduced width */
+  padding: 10px;
+  border: 1px solid #ccc; /* Light gray */
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 14px; /* Reduced font size */
+  outline: none; /* Remove outline */
+}
+
+/* Receipt styles */
+#receipt {
+  background-color: #fff; /* White */
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+#receiptContent {
+  border: 1px solid #ddd; /* Light gray */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.receipt-header {
+  background-color: #009688; /* Dark cyan */
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.receipt-body {
+  padding: 10px;
+}
+
+.receipt-total {
+  background-color: #f0f7f4; /* Light blue */
+  padding: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-weight: bold;
+}
+
+/* Filter styles */
+.filter-container {
+  margin-bottom: 20px;
+}
+
+.filter-label {
+  font-weight: bold;
+}
+
+.filter-input, .filter-select {
+  width: calc(100% - 20px); /* Reduced width */
+  padding: 6px;
+  border: 1px solid #ccc; /* Light gray */
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 14px; /* Reduced font size */
+  outline: none; /* Remove outline */
+}
+
